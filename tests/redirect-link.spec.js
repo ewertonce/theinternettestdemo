@@ -22,4 +22,8 @@ test('following the redirector link lands on the status codes page', async ({ pa
 
   await expect(page).toHaveURL(/\/status_codes/)
   await expect(page.getByRole('heading', { name: 'Status Codes', level: 3 })).toBeVisible();
+
+  for (const code of ['200', '301', '404', '500']) {
+    await expect(page.getByRole('link', { name: code, exact: true })).toBeVisible();
+  }
 })
